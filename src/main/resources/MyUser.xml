@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="test">
+    <!-- 通过id查询用户 -->
+    <select id="findUserById" parameterType="int" resultType="servlet.MyUser">
+        select * from myuser where id = #{id}
+    </select>
+    <!--通过name查找一个list的用户，模糊匹配-->
+    <select id="findUserByName" parameterType="java.lang.String" resultType="servlet.MyUser">
+        select * from myuser where name like '%${value}%'
+    </select>
+    <!--插入用户信息-->
+    <insert id="insertUser" parameterType="servlet.MyUser">
+        insert into myuser( id,name,password) values(#{id},#{name},#{password})
+    </insert>
+    <!--删除用户信息-->
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from myuser where id=#{id}
+    </delete>
+    <!--更新用户信息-->
+    <update id="updateUser" parameterType="servlet.MyUser">
+        update myuser set name=#{name},password=#{password} where id=#{id}
+    </update>
+</mapper>
